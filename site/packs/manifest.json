@@ -1,0 +1,46 @@
+{
+ "site": {
+  "name": "Cutscore",
+  "tagline": "Free certification practice that explains itself",
+  "blurb": "Practice questions written from the official exam outlines, with a plain-English explanation on every single one — including why each answer you didn't pick was wrong. No dumps, no paywall, no account."
+ },
+ "exams": [
+  {
+   "id": "ab900",
+   "file": "packs/ab900.json",
+   "code": "AB-900",
+   "name": "Copilot and Agent Administration Fundamentals",
+   "provider": "Microsoft",
+   "level": "Fundamentals",
+   "status": "live",
+   "blurb": "Microsoft 365 core services and security, data protection and governance with Purview, and the day-to-day administration of Copilot and agents.",
+   "minutes": 45,
+   "examQuestions": 40,
+   "verified": "2026-08-31",
+   "outlineDate": "2026-07-22",
+   "officialUrl": "https://learn.microsoft.com/credentials/certifications/copilot-and-agent-administration-fundamentals/",
+   "questions": 134,
+   "drills": 34,
+   "domains": [
+    {
+     "name": "Microsoft 365 core features & security",
+     "official": "30–35%",
+     "weight": 0.325,
+     "color": "#0B6B63"
+    },
+    {
+     "name": "Data protection & governance",
+     "official": "35–40%",
+     "weight": 0.375,
+     "color": "#6B4FA8"
+    },
+    {
+     "name": "Copilot & agent administration",
+     "official": "25–30%",
+     "weight": 0.3,
+     "color": "#A8632A"
+    }
+   ]
+  }
+ ]
+}

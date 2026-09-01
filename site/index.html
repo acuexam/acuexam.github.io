@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cutscore</title>
+<meta name="description" content="Free certification practice questions with a plain-English explanation on every one, including why each answer you didn't pick was wrong.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,500&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="inner">
+    <a class="brand" href="index.html">
+      <span class="mark">Cut<span>score</span></span>
+      <span class="tagline">practice that explains itself</span>
+    </a>
+    <nav>
+      <a href="#catalogue">Exams</a>
+      <a href="#how">How it works</a>
+      <a href="#honest">What this isn't</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <span class="eyebrow">Free · no account · works offline</span>
+    <h1>Practice questions that tell you <em>why</em> you were wrong.</h1>
+    <p class="lede">Most free exam prep is a pile of leaked questions with the answer letter next to it. You memorise the letter, pass nothing, and learn less. Every question here is written from the official skills outline and carries a real explanation — plus a line on each answer you didn't pick, saying what that thing actually does.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="#catalogue">Start practising</a>
+      <a class="btn" href="#how">See how it works</a>
+    </div>
+  </section>
+
+  <section class="pledge" aria-label="What you get">
+    <div>
+      <h3>Every answer explained</h3>
+      <p>Not just the right one. Each wrong option gets its own line explaining what it really is — which is where the confusable pairs finally separate.</p>
+    </div>
+    <div>
+      <h3>Clues highlighted</h3>
+      <p>The words in a question that reveal what it's testing are marked, so you learn to spot the tell instead of guessing under time pressure.</p>
+    </div>
+    <div>
+      <h3>Dated, not stale</h3>
+      <p>Every pack shows when its outline was published and when a human last checked it against the vendor's docs. If it's rotting, you'll see it.</p>
+    </div>
+    <div>
+      <h3>Your progress is yours</h3>
+      <p>Kept in your browser, never uploaded. Export it to a file whenever you want, import it on another machine. No sign-up.</p>
+    </div>
+  </section>
+
+  <section class="section" id="catalogue">
+    <div class="section-head">
+      <h2>Exams</h2>
+      <span class="eyebrow" id="catCount"></span>
+    </div>
+    <div class="catalogue" id="examList"></div>
+    <p class="prose" style="margin-top:16px;font-size:15px">Each row shows the real exam length and pass mark, how many questions the pack holds, and the official area weightings — practice runs are drawn in those same proportions, so a mock score means something.</p>
+  </section>
+
+  <section class="section" id="how">
+    <div class="section-head"><h2>How it works</h2></div>
+    <div class="card">
+      <div class="prose">
+        <p><strong>Pick a mode.</strong> Exam simulation runs the real length, the real timer, and the real area weighting, graded at the end. Study mode reveals the answer as you go. Menu drills put you in a drawn console screen and ask where you'd click. Weak spots rebuilds a set from exactly what you've been getting wrong.</p>
+        <p><strong>Answer, then read.</strong> The explanation names what the question was testing, states the answer plainly, and then goes through the options you didn't choose. That last part is the point — most exam mistakes are two features that sound alike, and you only separate them by learning what the other one does.</p>
+        <p><strong>The app remembers.</strong> Accuracy per topic, every attempt, and which individual questions still catch you. It'll tell you your three weakest topics and build a set from them on request.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="honest">
+    <div class="section-head"><h2>What this isn't</h2></div>
+    <div class="note-panel">
+      <h3>Not real exam questions</h3>
+      <p>Nothing here is copied from an actual exam. These are original questions written from the publicly published skills outlines and vendor documentation. Sites that repost leaked exam content put your certification at risk — using them breaks the agreement you sign before sitting an exam, and results get revoked over it. That's why this took longer to build and why it teaches better.</p>
+    </div>
+    <div class="note-panel" style="margin-top:12px">
+      <h3>Not affiliated with any vendor</h3>
+      <p>Cutscore is independent. Exam codes and product names belong to their owners and are used only to say which exam a pack covers. Console screens in the menu drills are drawn recreations built from public documentation, not screenshots.</p>
+    </div>
+    <div class="note-panel" style="margin-top:12px">
+      <h3>Not a substitute for the official material</h3>
+      <p>Practice questions find your gaps; they don't fill them. Every pack links to the vendor's own study guide and free learning path — read those, then come back and see what still catches you.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div><strong>Cutscore</strong> — free certification practice that explains itself.</div>
+    <div>Independent and unaffiliated. Exam codes and product names are the property of their respective owners. Questions are original, written from published skills outlines; they are not real exam questions.</div>
+  </div>
+</footer>
+
+<script>
+(async function () {
+  const box = document.getElementById('examList');
+  let data;
+  try {
+    data = await (await fetch('packs/manifest.json')).json();
+  } catch (e) {
+    box.innerHTML = '<div style="padding:22px"><p class="prose" style="margin:0">The exam list could not load. If you opened this file directly from disk, your browser blocks that read — serve the folder over HTTP instead (see the README) or use an offline single-exam build.</p></div>';
+    return;
+  }
+  const exams = data.exams || [];
+  document.getElementById('catCount').textContent =
+    exams.filter(e => e.status === 'live').length + ' live · more in progress';
+
+  const fmt = d => new Date(d + 'T00:00:00').toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+
+  box.innerHTML = exams.map(x => {
+    const live = x.status === 'live';
+    const rail = x.domains.map(d =>
+      '<i style="flex:' + d.weight + ';background:' + d.color + '" title="' + d.name + ' — ' + d.official + '"></i>').join('');
+    const key = x.domains.map(d =>
+      '<span><b style="background:' + d.color + '"></b>' + d.official + '</span>').join('');
+    return `
+    <a class="exam-row${live ? '' : ' disabled'}" ${live ? 'href="exam.html?exam=' + encodeURIComponent(x.id) + '"' : ''}>
+      <div>
+        <div class="exam-id">
+          <span class="code-badge">${x.code}</span>
+          <span class="tag ${live ? 'live' : 'soon'}">${live ? 'ready' : 'in progress'}</span>
+          <span class="verified"><i></i>checked ${fmt(x.verified)}</span>
+        </div>
+        <div class="exam-name">${x.name}</div>
+        <div class="exam-meta">${x.provider} ${x.level}<span class="dot">·</span>${x.minutes} min<span class="dot">·</span>${x.examQuestions} questions on the day<span class="dot">·</span>outline of ${fmt(x.outlineDate)}</div>
+      </div>
+      <div>
+        <div class="rail">${rail}</div>
+        <div class="rail-key">${key}</div>
+      </div>
+      <div class="counts">
+        <b>${x.questions}</b>questions<br>${x.drills} menu drills
+      </div>
+    </a>`;
+  }).join('');
+})();
+</script>
+</body>
+</html>
