@@ -1,13 +1,8 @@
-# Cutscore
+# acuExam
 
 Free certification practice that explains itself. Original questions written from
 published skills outlines, with a plain-English explanation on every one — including
 a line on each answer you *didn't* pick, saying what that thing actually does.
-
-> **The name is a placeholder.** "Cutscore" is the assessment term for a pass
-> threshold. Check the domain and trademark are free before you commit to it — it
-> appears in exactly two places: `site.name` in `packs/manifest.json` and the
-> `.brand` markup in `index.html` / `build_preview.py`.
 
 ---
 
@@ -16,14 +11,14 @@ a line on each answer you *didn't* pick, saying what that thing actually does.
 ```
 site/                     ← this folder is the whole website
   index.html                catalogue + landing page
-  exam.html                 the practice app shell (?exam=<id>)
+  exam/index.html           the practice app shell, served at /exam/ (?exam=<id>)
   assets/
     styles.css              design system, shared by both pages
     engine.js               the quiz engine — knows nothing about any exam
   packs/
     manifest.json           site name + the list of exams
     ab900.json              one exam: metadata, domains, terms, screens, questions
-build.py                  → dist/cutscore-<code>-offline.html  (single file, no server)
+build.py                  → dist/acuexam-<code>-offline.html  (single file, no server)
 build_preview.py          → dist/preview.html  (whole site as one page, for sharing)
 ```
 
@@ -53,7 +48,7 @@ and need no server code:
 | Netlify | drag the `site` folder onto the dashboard |
 
 There is no backend, no database and no account system. Progress lives in each
-visitor's own browser under `localStorage['cutscore-progress-v1']`, namespaced by
+visitor's own browser under `localStorage['acuexam-progress-v1']`, namespaced by
 exam id, and never leaves their machine. That is a deliberate limit: it means no
 sign-up and nothing to breach, but also no sync across devices. The Export/Import
 buttons on the progress page are the manual version of sync.

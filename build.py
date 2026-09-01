@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Cutscore build script.
+acuExam build script.
 
 The hosted site in site/ already works as-is: serve that folder and you're done.
 This script produces the *offline* single-file builds — one self-contained HTML
@@ -21,8 +21,8 @@ ROOT = pathlib.Path(__file__).parent
 SITE = ROOT / "site"
 DIST = ROOT / "dist"
 
-ENGINE_TAG = '<script src="assets/engine.js"></script>'
-CSS_TAG = '<link rel="stylesheet" href="assets/styles.css">'
+ENGINE_TAG = '<script src="/assets/engine.js"></script>'
+CSS_TAG = '<link rel="stylesheet" href="/assets/styles.css">'
 
 
 def build_offline(exam_id: str) -> pathlib.Path:
@@ -35,17 +35,17 @@ def build_offline(exam_id: str) -> pathlib.Path:
     pack = json.loads(pack_text)
     css = (SITE / "assets" / "styles.css").read_text(encoding="utf-8")
     engine = (SITE / "assets" / "engine.js").read_text(encoding="utf-8")
-    shell = (SITE / "exam.html").read_text(encoding="utf-8")
+    shell = (SITE / "exam" / "index.html").read_text(encoding="utf-8")
 
     if ENGINE_TAG not in shell or CSS_TAG not in shell:
-        raise SystemExit("exam.html no longer matches the tags build.py rewrites — update build.py")
+        raise SystemExit("exam/index.html no longer matches the tags build.py rewrites — update build.py")
 
     head, _ = shell.split(ENGINE_TAG, 1)
 
     # inline the stylesheet
     head = head.replace(CSS_TAG, "<style>\n" + css + "\n</style>")
     # no catalogue to go back to in a single-file build
-    head = head.replace('<a class="back" href="index.html">← All exams</a>', "")
+    head = head.replace('<a class="back" href="/">← All exams</a>', "")
     # a stray </script> inside pack text would break the inline script tag
     safe_pack = pack_text.replace("</", "<\\/")
 
@@ -60,7 +60,7 @@ def build_offline(exam_id: str) -> pathlib.Path:
 (function () {{
   const pack = JSON.parse({json.dumps(safe_pack)});
   const app = document.getElementById('app');
-  document.title = pack.code + ' practice · Cutscore';
+  document.title = pack.code + ' practice · acuExam';
   document.getElementById('barCode').textContent = pack.code;
   document.getElementById('barName').textContent = pack.name;
   const link = document.getElementById('officialLink');
@@ -71,7 +71,7 @@ def build_offline(exam_id: str) -> pathlib.Path:
     ', last checked against ' + pack.provider + '\\u2019s documentation on ' + fmt(pack.verified) + '. ' +
     'Original questions, not real exam content. Independent and unaffiliated with ' + pack.provider + '. ' +
     'Offline single-file build \\u2014 your progress is saved in this browser, for this file.';
-  Cutscore.mount(pack, app);
+  acuExam.mount(pack, app);
 }})();
 </script>
 </body>
@@ -82,7 +82,7 @@ def build_offline(exam_id: str) -> pathlib.Path:
     out_html = re.sub(r"\n[ \t]*\n[ \t]*(<span class=\"code-badge\")", r"\n    \1", out_html)
 
     DIST.mkdir(exist_ok=True)
-    out = DIST / f"cutscore-{pack['code'].lower().replace(' ', '-')}-offline.html"
+    out = DIST / f"acuexam-{pack['code'].lower().replace(' ', '-')}-offline.html"
     out.write_text(out_html, encoding="utf-8")
     return out
 

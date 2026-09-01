@@ -1,14 +1,14 @@
 /* ============================================================
-   Cutscore engine — exam-agnostic.
+   acuExam engine — exam-agnostic.
    Everything specific to an exam lives in its pack JSON:
    metadata, domain weights, highlight terms, screens, questions.
-   Usage:  Cutscore.mount(pack, document.getElementById('app'))
+   Usage:  acuExam.mount(pack, document.getElementById('app'))
    ============================================================ */
-window.Cutscore = (function () {
+window.acuExam = (function () {
   'use strict';
 
   const KEYS = ['A', 'B', 'C', 'D', 'E', 'F'];
-  const STORE = 'cutscore-progress-v1';
+  const STORE = 'acuexam-progress-v1';
   const MODE_NAMES = {
     exam: 'Exam simulation', full: 'Full bank', practice: 'Study mode',
     weak: 'Weak spots', drills: 'Menu drills', retry: 'Retry missed'
@@ -692,7 +692,7 @@ window.Cutscore = (function () {
       const blob = new Blob([JSON.stringify({ exam: pack.id, code: pack.code, ...loadProg(pack.id) }, null, 1)], { type: 'application/json' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = 'cutscore-' + pack.id + '-' + new Date().toISOString().slice(0, 10) + '.json';
+      a.download = 'acuexam-' + pack.id + '-' + new Date().toISOString().slice(0, 10) + '.json';
       a.click();
       setTimeout(() => URL.revokeObjectURL(a.href), 2000);
     });
@@ -708,7 +708,7 @@ window.Cutscore = (function () {
           saveProg(pack.id, { attempts: d.attempts || [], q: d.q || {} });
           renderProgressView(); renderProgressSummary();
           alert('Progress imported.');
-        } catch (err) { alert('That file could not be read as a Cutscore progress export.'); }
+        } catch (err) { alert('That file could not be read as an acuExam progress export.'); }
       };
       rd.readAsText(f); e.target.value = '';
     });

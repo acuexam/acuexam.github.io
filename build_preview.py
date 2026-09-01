@@ -27,7 +27,7 @@ landing = landing.replace('href="#catalogue"', 'href="#catalogue"')
 safe_pack = pack_text.replace("</", "<\\/")
 safe_manifest = json.dumps(manifest, ensure_ascii=False).replace("</", "<\\/")
 
-html = f"""<title>Cutscore</title>
+html = f"""<title>acuExam</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&amp;family=Newsreader:ital,wght@0,400;0,500;0,600;1,500&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap">
@@ -39,7 +39,8 @@ html = f"""<title>Cutscore</title>
   <header class="masthead">
     <div class="inner">
       <a class="brand" href="#/">
-        <span class="mark">Cut<span>score</span></span>
+        <span class="logo">AE</span>
+        <span class="mark">acu<span>Exam</span></span>
         <span class="tagline">practice that explains itself</span>
       </a>
       <nav>
@@ -54,7 +55,7 @@ html = f"""<title>Cutscore</title>
   </main>
   <footer class="foot">
     <div class="wrap">
-      <div><strong>Cutscore</strong> — free certification practice that explains itself.</div>
+      <div><strong>acuExam</strong> — free certification practice that explains itself.</div>
       <div>Independent and unaffiliated. Exam codes and product names are the property of their respective owners. Questions are original, written from published skills outlines; they are not real exam questions.</div>
     </div>
   </footer>
@@ -118,7 +119,7 @@ html = f"""<title>Cutscore</title>
         'Pack built from the skills outline published ' + fmt(PACK.outlineDate) +
         ', last checked against ' + PACK.provider + '\\u2019s documentation on ' + fmt(PACK.verified) + '. ' +
         'Original questions, not real exam content. Independent and unaffiliated with ' + PACK.provider + '.';
-      Cutscore.mount(PACK, document.getElementById('app'));
+      acuExam.mount(PACK, document.getElementById('app'));
     }}
     if (onExam) window.scrollTo(0, 0);
   }}

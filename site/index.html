@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cutscore</title>
+<title>acuExam</title>
 <meta name="description" content="Free certification practice questions with a plain-English explanation on every one, including why each answer you didn't pick was wrong.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,8 +14,9 @@
 
 <header class="masthead">
   <div class="inner">
-    <a class="brand" href="index.html">
-      <span class="mark">Cut<span>score</span></span>
+    <a class="brand" href="/">
+      <span class="logo">AE</span>
+      <span class="mark">acu<span>Exam</span></span>
       <span class="tagline">practice that explains itself</span>
     </a>
     <nav>
@@ -85,7 +86,7 @@
     </div>
     <div class="note-panel" style="margin-top:12px">
       <h3>Not affiliated with any vendor</h3>
-      <p>Cutscore is independent. Exam codes and product names belong to their owners and are used only to say which exam a pack covers. Console screens in the menu drills are drawn recreations built from public documentation, not screenshots.</p>
+      <p>acuExam is independent. Exam codes and product names belong to their owners and are used only to say which exam a pack covers. Console screens in the menu drills are drawn recreations built from public documentation, not screenshots.</p>
     </div>
     <div class="note-panel" style="margin-top:12px">
       <h3>Not a substitute for the official material</h3>
@@ -97,7 +98,7 @@
 
 <footer class="foot">
   <div class="wrap">
-    <div><strong>Cutscore</strong> — free certification practice that explains itself.</div>
+    <div><strong>acuExam</strong> — free certification practice that explains itself.</div>
     <div>Independent and unaffiliated. Exam codes and product names are the property of their respective owners. Questions are original, written from published skills outlines; they are not real exam questions.</div>
   </div>
 </footer>
@@ -125,7 +126,7 @@
     const key = x.domains.map(d =>
       '<span><b style="background:' + d.color + '"></b>' + d.official + '</span>').join('');
     return `
-    <a class="exam-row${live ? '' : ' disabled'}" ${live ? 'href="exam.html?exam=' + encodeURIComponent(x.id) + '"' : ''}>
+    <a class="exam-row${live ? '' : ' disabled'}" ${live ? 'href="/exam/?exam=' + encodeURIComponent(x.id) + '"' : ''}>
       <div>
         <div class="exam-id">
           <span class="code-badge">${x.code}</span>

@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cutscore</title>
+<title>acuExam</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,500&family=JetBrains+Mono:wght@400;600&display=swap">
-<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="/assets/styles.css">
 </head>
 <body>
 
 <header class="exam-bar">
   <div class="inner">
-    <a class="back" href="index.html">← All exams</a>
+    <a class="back" href="/">← All exams</a>
     <span class="code-badge" id="barCode"></span>
     <span class="title" id="barName"></span>
     <span class="right">
@@ -27,7 +27,7 @@
   <p class="prose" style="font-size:13.5px;margin-top:38px" id="packFoot"></p>
 </main>
 
-<script src="assets/engine.js"></script>
+<script src="/assets/engine.js"></script>
 <script>
 (async function () {
   const app = document.getElementById('app');
@@ -35,18 +35,18 @@
 
   let manifest, pack;
   try {
-    manifest = await (await fetch('packs/manifest.json')).json();
+    manifest = await (await fetch('/packs/manifest.json')).json();
     const entry = (manifest.exams || []).find(e => e.id === id);
     if (!entry) throw new Error('unknown exam');
-    pack = await (await fetch(entry.file)).json();
+    pack = await (await fetch('/' + entry.file)).json();
   } catch (e) {
     app.innerHTML = '<div class="card"><h3>That exam could not be loaded</h3>'
       + '<p class="prose" style="margin-top:8px">Either the pack is missing, or you opened this file straight from disk — browsers block a local page from reading local files. Serve the folder over HTTP (the README has a one-line command) or use an offline single-exam build.</p>'
-      + '<p style="margin-top:14px"><a class="btn" href="index.html">← All exams</a></p></div>';
+      + '<p style="margin-top:14px"><a class="btn" href="/">← All exams</a></p></div>';
     return;
   }
 
-  document.title = pack.code + ' practice · Cutscore';
+  document.title = pack.code + ' practice · acuExam';
   document.getElementById('barCode').textContent = pack.code;
   document.getElementById('barName').textContent = pack.name;
   const link = document.getElementById('officialLink');
@@ -58,7 +58,7 @@
     ', last checked against ' + pack.provider + '’s documentation on ' + fmt(pack.verified) + '. ' +
     'Original questions, not real exam content. Independent and unaffiliated with ' + pack.provider + '.';
 
-  Cutscore.mount(pack, app);
+  acuExam.mount(pack, app);
 })();
 </script>
 </body>
